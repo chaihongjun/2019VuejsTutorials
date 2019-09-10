@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-bind动态绑定class(对象语法方式)</title>
+
+    <style>
+        .size {
+            font-size: 24px;
+        }
+        
+        .color {
+            color: gray;
+        }
+        
+        .background {
+            background: gray;
+        }
+        
+        .text {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p :class="{color:true,background:false}">
+            class绑定对象语法:key是CSS中的类选择器，value则是一个布尔值, 当布尔值为true时，这选择器生效，否则无效
+        </p>
+
+        <p :class="{text:isActive}">
+            所以，一般情况下布尔值用一个变量代表,再通过事件可以改变
+        </p>
+
+        <p :class="classes">
+            如果涉及的Class比较多可以放在计算属性中
+        </p>
+
+
+        <button @click="isActive=!isActive">改变下划线状态</button>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                isActive: true
+            },
+            computed: {
+                classes() {
+
+                    return {
+                        color: this.isActive,
+                        background: !this.isActive,
+                        size: this.isActive
+                    }
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

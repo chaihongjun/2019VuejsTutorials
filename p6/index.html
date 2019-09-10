@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue案例：计算器</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>当前计算器点击加号累计加一，点击减号累计减一，默认是0</p>
+
+        <p>当前计数:{{ counter }}</p>
+
+        <!-- 执行的动作可以表达式counter++ 或counter-- -->
+
+        <button @click="counter++">+</button>
+        <button @click="counter--">-</button>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                counter: 0
+            }
+        });
+    </script>
+</body>
+
+</html>

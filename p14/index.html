@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-bind指令基本使用</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 尝试使用插值方法 -->
+        <a href="{{ webUrl }}" target="_blank" title="HUPU">
+            <img src="{{ logoSrc }}" alt="虎扑logo" />
+        </a>
+
+        <p>
+            控制台报错： Interpolation inside attributes has been removed. Use v-bind or the colon shorthand instead
+        </p>
+        <p>属性内的插值语法{{}}已经被移除，应该使用v-bind</p>
+
+        <!--v-bind 动态绑定元素属性值 比如src,href 等-->
+
+        <a :href="webUrl" target="_blank" title="HUPU">
+            <img :src="logoSrc" alt="虎扑logo" />
+        </a>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                logoSrc: "https://b3.hoopchina.com.cn/images/logo2017/v1/hp_logo_sports.png",
+                webUrl: "https://www.hupu.com"
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue其他指令</title>
+
+
+
+
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        
+        .v-pre,
+        .v-once,
+        .v-html,
+        .v-text {
+            border: 1px solid #ccc
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-cloak属性在Vue解析之后消失 -->
+    <div id="app" v-cloak>
+        <P>{{ message }}</P>
+        <p>{{ firstName }}-{{ lastName }}</p>
+
+        <!-- v-pre 这里不会解析变量的内容 类似HTML中的pre标签，保留预格式 -->
+        <p v-pre class="v-pre">
+            {{ pre }}
+        </p>
+
+        <!-- v-once 只做一次渲染,数据改变不会随着变化 -->
+        <p v-once class="v-once">
+            {{ once }}
+        </p>
+
+        <!-- v-html 将以html方式展示 -->
+        <p v-html="url" class="v-html">
+            {{url}} v-html 将以html方式展示
+        </p>
+
+        <!-- v-text 将以文本方式展示  -->
+        <p v-text="url" class="v-text">
+            {{url}} v-text 将以文本方式展示
+        </p>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        //  Vue在页面加载完毕1秒后再解析
+        setTimeout(function() {
+            const app = new Vue({
+                el: "#app", // 挂载Vue管理DOM节点
+                data: {
+                    message: "hello!",
+                    firstName: "kobe",
+                    lastName: "bryant",
+                    pre: "不会解析这里的内容",
+                    once: "once",
+                    url: '<a href="https://www.baidu.com/">百度一下</a>'
+                }
+            });
+        }, 1000);
+
+        // 再次对once修改，页面没变化
+        app.once = "2";
+    </script>
+</body>
+
+</html>
