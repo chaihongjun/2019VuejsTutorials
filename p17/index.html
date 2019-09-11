@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-11 14:04:21
+ * @LastEditors: Please set LastEditors
+ -->
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 
@@ -27,14 +34,8 @@
     <div id="app">
         <ul>
 
-            <!-- 思路解析：
-             1.  每个渲染项目 
-            
-        
-          
-                -->
 
-
+            <!--当前 点击项目的索引值 如果 等于当前索引-->
             <li v-for="(item,index) in movies" @click="getRed(index)" :class="{red:currentIndex==index}">
                 {{ index + 1 }}-{{ item }}
             </li>
@@ -53,15 +54,12 @@
             methods: {
                 //将当前点击项的索引传入方法
                 getRed(index) {
-
                     this.currentIndex = index;
                     console.log("当前点击的按钮索引:" + index);
-
-
                 }
             }
         });
     </script>
 </body>
 
-</html>
+</html>w

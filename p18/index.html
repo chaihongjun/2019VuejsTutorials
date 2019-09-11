@@ -1,0 +1,49 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-11 12:02:31
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-bind动态绑定Style(对象语法)</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="movie in movies">
+                {{ movie }}
+            </li>
+        </ul>
+
+
+        <!-- <p :style="{样式属性1:属性值变量1,样式属性2:属性值变量2}"></p> -->
+
+
+        <p>动态绑定style，value是样式属性，属性值则是样式属性值,样式名称可以是驼峰也可以是短横线形式</p>
+        <p :style="{fontSize:fontSize,color:fontColor}">{{ msg }}</p>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                msg: "v-bind动态绑定内联样式，CSS属性名可以是驼峰可以是短横线分隔",
+                movies: ["速度与激情", "中国机长", "烈火英雄", "攀登者"],
+
+                fontSize: "24px",
+                fontColor: "#B0C4DE"
+            }
+        });
+    </script>
+</body>
+
+</html>w

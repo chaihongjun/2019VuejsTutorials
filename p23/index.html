@@ -1,0 +1,90 @@
+<!--
+ * @Description: In User Settings   Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-11 17:02:55
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>计算属性的setter和getter</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>计算属性包含setter和getter，一般只使用setter</p>
+        <table>
+            <th>序号</th>
+            <th>片名</th>
+            <th>票价</th>
+            <tbody>
+                <tr v-for="movie in movies">
+                    <td>{{ movie.id }}</td>
+                    <td>{{ movie.name }}</td>
+                    <td>{{ movie.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>电影总票价：{{ totalPrice }}￥</p>
+    </div>
+    <!--                 引入Vue                        -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", //                挂载Vue管理DOM节点
+            data: {
+                // result: 0,
+                movies: [{
+                    id: "01",
+                    name: "速度与激情",
+                    price: 25
+                }, {
+                    id: "02",
+                    name: "中国机长",
+                    price: 25
+                }, {
+                    id: "03",
+                    name: "烈火英雄",
+                    price: 25
+                }, {
+                    id: "04",
+                    name: "攀登者",
+                    price: 25
+                }]
+            },
+            computed: {
+                totalPrice() {
+                    let result = 0;
+                    for (let i = 0; i < this.movies.length; i++) {
+                        result += this.movies[i].price;
+                    }
+                    return result;
+                },
+                //默认的计算属性
+                calculatedAttribute: {
+                    get() {
+                        console.log("getter");
+                    },
+                    set(newValue) {
+
+                        console.log("setter");
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

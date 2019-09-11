@@ -1,0 +1,94 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-11 15:24:00
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>计算属性的复杂操作</title>
+</head>
+
+<body>
+    <div id="app">
+        FirstName:
+        <span>{{ firstName }}</span>
+        <br /> LastName:
+        <span>{{ lastName }}</span>
+        <!-- fullName是一个属性，所以不需要（） -->
+        <br /> So,fullname is : {{ fullName }}(计算属性) <br />
+        <p>methods方法</p>
+        Yes, {{ getFullName() }} (方法)
+        <br> Yes, {{ getFullName() }} (方法)
+        <br> 两次调用方法，两次执行方法
+
+
+        <p>methods计算属性：</p>
+        <p>电影总票价：{{ totalPrice }}￥</p>
+        <p>电影总票价：{{ totalPrice }}￥</p>
+        <p>计算属性两次调用，但只执行了一次</p>
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                firstName: "Carmelo",
+                lastName: "Anthony",
+                movies: [{
+                    id: 01,
+                    name: "速度与激情",
+                    price: 35
+                }, {
+                    id: 02,
+                    name: "中国机长",
+                    price: 40
+                }, {
+                    id: 03,
+                    name: "烈火英雄",
+                    price: 30
+                }, {
+                    id: 04,
+                    name: "攀登者",
+                    price: 37
+                }]
+            },
+            computed: {
+                fullName() {
+                    console.log("------ computed -----");
+                    return this.firstName + " " + this.lastName;
+                },
+                totalPrice() {
+                    let result = 0;
+                    // 方法一
+                    for (let i = 0; i < this.movies.length; i++) {
+
+                        result += this.movies[i].price;
+                    }
+
+                    // 方法二
+                    // for (let key in this.movies) {
+                    //     result += this.movies[key].price;
+                    // }
+
+                    return result;
+                }
+            },
+            methods: {
+                getFullName() {
+                    console.log("------ methods  -----");
+                    return this.firstName + " " + this.lastName;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

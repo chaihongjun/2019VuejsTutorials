@@ -1,0 +1,59 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-11 14:34:23
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>计算属性的基本使用</title>
+</head>
+
+<body>
+    <div id="app">
+        FirstName:
+        <span>{{firstName}}</span>
+        <br> LastName:
+        <span>{{lastName}}</span>
+        <!-- fullName是一个属性，所以不需要（） -->
+        <br> So,fullname is : {{fullName}}(计算属性)
+        <br>Yes, {{getFullName()}} (方法)
+
+    </div>
+
+    <!-- 引入Vue -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", // 挂载Vue管理DOM节点
+            data: {
+                firstName: 'Carmelo',
+                lastName: 'Anthony'
+            },
+            computed: {
+                fullName() {
+                    console.log("------ computed -----");
+                    return this.firstName + ' ' + this.lastName
+
+                }
+            },
+            methods: {
+
+                getFullName() {
+
+                    console.log("------ methods  -----");
+                    return this.firstName + ' ' + this.lastName
+
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>
