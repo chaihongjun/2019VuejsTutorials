@@ -1,0 +1,54 @@
+<!--
+ * @Description: In User Settings   Edit
+ * @Author: your name
+ * @Date: 2019-09-10 16:39:23
+ * @LastEditTime: 2019-09-12 17:32:56
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ES6对象字面量增强写法</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script>
+        // 1. ES5属性写法
+        let name = "chj"
+        let sex = "male"
+        const man = {
+            name: name,
+            sex: sex
+        }
+        console.log(man)
+            // 2. ES属性增强写法 
+            // 当属性名称和变量名相同的时候，只需要写属性名
+        let nickname = "chj"
+        let gender = "male"
+        const person = {
+            nickname,
+            gender
+        }
+        console.log(person)
+            // 3. ES5函数写法
+        var obj = {
+                getName: function() {
+                    console.log(name)
+                }
+            }
+            // 4. ES6 增强写法
+            // 省略了function
+        const people = {
+            getName() {
+                console.log(name)
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
  * @Description: In User Settings   Edit
  * @Author: your name
  * @Date: 2019-09-10 16:39:23
- * @LastEditTime: 2019-09-11 17:24:10
+ * @LastEditTime: 2019-09-12 16:15:44
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -12,25 +12,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>块级作用域let/var</title>
-
 </head>
 
 <body>
     <div id="app">
-
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
     </div>
     <!--                 引入Vue                        -->
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
     <script>
         const app = new Vue({
             el: "#app", //                挂载Vue管理DOM节点
-            data: {
-
-            },
-            computed: {
-
-            }
+            data: {},
+            computed: {}
         });
+        //如果不使用闭包，则会出现问题
+        var btns = document.getElementsByTagName("button");
+        // for (var i = 0; i < btns.length; i++) {
+        //     btns[i].addEventListener("click", function() {
+        //         console.log("第" + i + "个按钮被点击");
+        //     });
+        // }
+        //使用闭包可以解决
+        // for (var i = 0; i < btns.length; i++) {
+        //     (function(i) {
+        //         btns[i].addEventListener("click", function() {
+        //             alert("第" + (i + 1) + "个按钮被点击");
+        //         });
+        //     })(i);
+        // }
+        // 或使用let声明有作用域的变量
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function() {
+                console.log("第" + (i + 1) + "个按钮被点击");
+            });
+        }
     </script>
 </body>
 
