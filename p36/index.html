@@ -1,0 +1,85 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-15 14:47:27
+ * @LastEditTime: 2019-09-15 15:23:02
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>v-for遍历数组和对象</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>v-for遍历数组</p>
+        <ul>
+            <!-- 遍历过程没使用索引值 -->
+            <li>遍历过程没使用索引值,只显示数组项值value in array</li>
+            <li v-for="item in names">
+                {{item}}
+            </li>
+            <li>----------------</li>
+            <li>遍历过程中使用索引值(value,index) in array</li>
+            <!-- 遍历过程中使用索引值 -->
+            <li v-for="(item,index) in names">
+                {{index}}.{{item}}
+            </li>
+            <li>----------------</li>
+        </ul>
+        <p>v-for遍历对象</p>
+        <ul>
+
+            <!-- 遍历对象属性的的值 -->
+            <li>遍历对象属性的的值value in object</li>
+            <li v-for="player in players">
+                {{player}}
+            </li>
+
+            <li>----------------</li>
+
+
+            <!-- 遍历对象的属性和属性值 -->
+            <li>遍历对象的属性和属性值(value,key) in object</li>
+            <li v-for="(player,key) in players">
+                {{key}}.{{player}}
+            </li>
+            <li>----------------</li>
+
+            <!-- 遍历对象的属性,属性值和索引值 -->
+            <li>遍历对象的属性,属性值和索引值(value,key,index) in object</li>
+            <li v-for="(player,key,index) in players">
+                {{index}}.{{key}}.{{player}}
+            </li>
+
+
+
+        </ul>
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {
+                names: [
+                    'Kobe',
+                    'Anthony',
+                    'James',
+                    'Paul'
+                ],
+                players: {
+                    name: 'Anthony',
+                    height: 2.03,
+                    position: 'small forward',
+                    weight: 230,
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
