@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
- * @Date: 2019-09-15 11:25:49
- * @LastEditTime: 2019-09-15 13:49:03
+ * @Date: 2019-09-15 13:45:58
+ * @LastEditTime: 2019-09-15 13:55:16
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -10,61 +10,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>登录切换小案例</title>
+    <title>登录切换的input复用</title>
 </head>
 
 <body>
     <div id="app">
         <p>可以使用用户账户登录，也可以使用邮箱地址登录</p>
-        <p>方法一：</p>
+        <p>出于性能考虑，Vue会复用元素，为了不复用，则可以使用key属性来标识元素</p>
         <span v-if="modeType">
         <label for="userAccount"
-          >账户： </label>
+          >账户：</label>
           <input
             type="text"
             name="userAccount"
             id="userAccount"
             placeholder="账户"
+           
+
           />
-       
+        
       </span>
         <span v-else>
         <label for="userEmail"
-          >邮箱：  </label>
+          >邮箱：</label>
           <input
             type="text"
             name="userEmail"
             id="userEmail"
             placeholder="邮箱"
+           
           />
-      
+        
       </span>
         <button @click="changeMode">切换为{{ mode }}方式登录</button>
-        <hr>
-        <p>方法二：</p>
-        <span v-if="isUser">
-        <label>账户： </label>
-          <input type="text"   placeholder="账户 " />
-       
-      </span>
-        <span v-else>
-        <label>邮箱：  </label>
-          <input type="text"   placeholder="邮箱 " />
-      
-      </span>
-        <button @click="isUser=!isUser">切换类型</button>
-
-        <hr>
-        <p>方法三：</p>
-        <template v-if="loginType == true">
-            <label for="a">Username</label>
-            <input placeholder="Enter your username" id="a">
-          </template>
-        <template v-else>
-            <label for="b">Email</label>
-            <input placeholder="Enter your email address" id="b">
-          </template>
-        <button @click="loginType=!loginType">切换类型</button>
 
 
     </div>
