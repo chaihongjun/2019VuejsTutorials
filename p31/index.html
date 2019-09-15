@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-12 17:48:26
+ * @LastEditTime: 2019-09-15 10:59:10
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-on 修饰符</title>
+    <style>
+        .div {
+            width: 100px;
+            height: 50px;
+            background: gray;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <p> 因为存在事件冒泡，所以可能会有意想不到的情况 </p>
+
+        <div class="div" @click="divClick">
+            <button @click="btnClick">按钮</button>
+        </div>
+
+
+        <p> v-on绑定事件使用修饰符.stop 阻止事件冒泡 </p>
+        <div class="div" @click="divClick">
+            <button @click.stop="btnClick">按钮</button>
+        </div>
+
+
+        <p>使用.prevent 阻止事件的默认行为(比如表单提交)</p>
+
+        <form action="baidu">
+            <input type="submit" value="提交" @click.prevent="submitClick">
+        </form>
+
+        <p>使用keyCode/keyAlias 触发特定键(比如回车键触发提交)</p>
+
+        <form action="baidu">
+            <input @keyup.13="onEnter" type="text" placeholder="keyCode:@keyup.13='onEnter'">
+        </form>
+
+        <form action="baidu">
+            <input @keyup.enter="onEnter" type="text" placeholder="keyAlias:@keyup.enter='onEnter'">
+        </form>
+
+        <p> .once只触发一次</p>
+        <button @click.once="once">在刷新页面前只有一次有效</button>
+
+
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app", //                挂载Vue管理DOM节点
+            data: {
+                counter: 0
+            },
+            methods: {
+                divClick() {
+                    console.log("--------- divClick ");
+                    alert("--------- divClick ");
+                },
+                btnClick() {
+                    console.log("--------- btnClick ");
+                    alert("--------- btnClick ");
+                },
+                submitClick() {
+
+                    console.log("submitClick");
+
+
+                },
+                once() {
+                    this.counter++;
+                    console.log("只触发" + this.counter + "次");
+                    alert("只触发" + this.counter + "次");
+
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
