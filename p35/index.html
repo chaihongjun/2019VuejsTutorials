@@ -1,0 +1,71 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-15 13:56:47
+ * @LastEditTime: 2019-09-15 14:44:03
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>v-show和v-if的区别</title>
+
+
+    <style>
+        .vif {
+            background: gray;
+            width: 200px;
+            height: 80px;
+            margin-top: 10px;
+        }
+        
+        .vshow {
+            background: pink;
+            width: 200px;
+            height: 80px;
+            margin-top: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="vif" class="vif">{{message}}</p>
+
+        <button @click="vif=!vif">切换</button>
+
+
+
+        <p v-show="vshow" class="vshow">{{message}}</p>
+
+        <button @click="vshow=!vshow">切换</button>
+
+
+        <p>v-show，无论布尔值结果如何，都不会影响DOM渲染，只会影响元素的显示或隐藏状态(display:none)</p>
+
+        <p>v-if，当布尔值为假值时，元素不会存在于DOM树中</p>
+
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //                挂载Vue管理DOM节点
+            data: {
+                vif: true,
+                vshow: true,
+                message: 'v-show和v-if的区别',
+            },
+
+        });
+    </script>
+</body>
+
+</html>
