@@ -1,0 +1,113 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-15 16:40:10
+ * @LastEditTime: 2019-09-15 17:47:49
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数组中的响应式方法</title>
+
+    <style>
+        .fixed {
+            position: fixed;
+            top: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <p>push,pop,shift,unshift,splice,sort,reverse都是响应式的</p>
+
+
+        <ul class="list">
+            <li v-for="letter in letters">
+                {{letter}}
+            </li>
+        </ul>
+
+
+        <div class="fixed">
+            <button @click="push">尾部压入push</button>
+            <button @click="pop">尾部弹出pop</button>
+
+
+            <button @click="shift">头部弹出shift</button>
+            <button @click="unshift">头部压入unshift</button>
+
+
+            <button @click="splice">splice裁剪数组</button>
+        </div>
+
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {
+                letters: [
+                    'A',
+                    'B',
+                    'C',
+                    'D'
+                ]
+            },
+            methods: {
+                //  数组尾部添加
+                push() {
+                    this.letters.push("push");
+                    console.log(this.letters);
+                },
+                // 数组尾部弹出
+                pop() {
+                    let rear = '';
+                    rear = this.letters.pop()
+                    console.log(rear)
+                    console.log(this.letters);
+
+                },
+                //数组头部弹出
+                shift() {
+                    let head = ''
+                    head = this.letters.shift()
+                    console.log(head)
+                    console.log(this.letters);
+                },
+                //数组头部添加
+                unshift() {
+                    this.letters.unshift('unshift')
+                    console.log(this.letters);
+                },
+                // splice 裁切 数组
+                splice() {
+                    // this.letters.splice(start,?deleteCount,...items)
+
+                    // 从索引0开始，删除0个元素，再插入"splice"
+                    // this.letters.splice(0, 0, "splice")
+
+                    // 从索引0开始，删除1个元素，再插入"splice"
+                    // this.letters.splice(0, 1, "splice")
+
+                    // 从索引0开始，删除1个元素
+                    this.letters.splice(0, 1)
+
+
+                }
+            },
+
+        });
+    </script>
+</body>
+
+</html>
