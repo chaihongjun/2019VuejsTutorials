@@ -1,0 +1,104 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-15 11:25:49
+ * @LastEditTime: 2019-09-15 12:26:46
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>登录切换小案例</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>可以使用用户账户登录，也可以使用邮箱地址登录</p>
+        <p>方法一：</p>
+        <span v-if="modeType">
+        <label for="userAccount"
+          >账户：
+          <input
+            type="text"
+            name="userAccount"
+            id="userAccount"
+            placeholder="账户"
+          />
+        </label>
+      </span>
+        <span v-else>
+        <label for="userEmail"
+          >邮箱：
+          <input
+            type="text"
+            name="userEmail"
+            id="userEmail"
+            placeholder="邮箱"
+          />
+        </label>
+      </span>
+        <button @click="changeMode">切换为{{ mode }}方式登录</button>
+        <hr>
+        <p>方法二：</p>
+        <span v-if="isUser">
+        <label>账户：
+          <input type="text"   placeholder="账户 " />
+        </label>
+      </span>
+        <span v-else>
+        <label>邮箱：
+          <input type="text"   placeholder="邮箱 " />
+        </label>
+      </span>
+        <button @click="isUser=!isUser">切换类型</button>
+
+        <hr>
+        <p>方法三：</p>
+        <template v-if="loginType == true">
+            <label for="a">Username</label>
+            <input placeholder="Enter your username" id="a">
+          </template>
+        <template v-else>
+            <label for="b">Email</label>
+            <input placeholder="Enter your email address" id="b">
+          </template>
+        <button @click="loginType=!loginType">切换类型</button>
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //                挂载Vue管理DOM节点
+            data: {
+                modeType: true,
+                mode: "邮箱",
+                isUser: true,
+                loginType: true
+            },
+            methods: {
+                changeMode() {
+                    // if (this.modeType == true) {
+                    //     this.modeType = false;
+                    // } else {
+                    //     this.modeType = true;
+                    // }
+                    this.modeType = !this.modeType;
+                    // if (this.mode == "账户") {
+                    //     this.mode = "邮箱";
+                    // } else {
+                    //     this.mode = "账户";
+                    // }
+                    this.mode == "账户" ? this.mode = "邮箱" : this.mode = "账户";
+                    return this.mode;
+                    console.log("this.mode: " + this.mode);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
