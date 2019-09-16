@@ -1,0 +1,82 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-16 15:48:19
+ * @LastEditTime: 2019-09-16 16:23:09
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-model结合checkbox</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="app">
+
+        <label for="password">记住密码</label>
+        <input type="checkbox" class="checkbox" id="password" v-model="remember">
+
+        <label for="ssl ">SSL安全登录</label>
+        <input type="checkbox" class="checkbox" id="ssl" v-model="ssl">
+        <p>remember: {{remember}} </p>
+        <p>ssl:{{ssl}}</p>
+
+        <button :disabled="this.remember && this.ssl==true?false:true">下一步</button>
+
+        <hr>
+
+
+        <p>请选择你喜欢的电影:</p>
+
+        <label for="climber">《攀登者》</label>
+        <input type="checkbox" class="checkbox" id="climber" value="攀登者" v-model="hobbies">
+
+        <label for="captain">《中国机长》</label>
+        <input type="checkbox" class="checkbox" id="captain" value="中国机长" v-model="hobbies">
+
+
+        <label for="hero">《烈火英雄》</label>
+        <input type="checkbox" class="checkbox" id="hero" value="烈火英雄" v-model="hobbies">
+
+
+        <p>选择的电影是：{{hobbies}}</p>
+
+        <p>一组checkbox以数组形式绑定数据</p>
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {
+                remember: false,
+                ssl: false,
+                hobbies: []
+
+            },
+            computed: {
+                // both() {
+                //     if (this.remember && this.ssl == true) {
+                //         return false;
+                //     } else {
+                //         return true;
+                //     }
+
+                // }
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

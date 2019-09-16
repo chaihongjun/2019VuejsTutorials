@@ -1,0 +1,90 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-16 16:25:52
+ * @LastEditTime: 2019-09-16 16:54:21
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-model结合select</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="container">
+
+
+            <div class="input-group mb-3">
+                <p>请选择一种假期</p>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">假期类型</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" v-model="holiday">
+              <option selected>Choose...</option>
+              <option value="事假">事假</option>
+              <option value="病假">病假</option>
+              <option value="婚假">婚假</option>
+            </select>
+            </div>
+
+            你选择的是:{{holiday}}
+
+
+
+
+            <div class="input-group mb-3">
+                <p>请选择中意的水果（可多选）</p>
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect02">水果</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect02" v-model="fruit" multiple>
+        
+              <option value="苹果">苹果</option>
+              <option value="哈密瓜">哈密瓜</option>
+              <option value="香蕉">香蕉</option>
+              <option value="西瓜">西瓜</option>
+            </select>
+            </div>
+
+
+            你选择的是:{{fruit}}
+
+
+        </div>
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {
+                holiday: '',
+                fruit: [],
+
+            },
+            computed: {
+                // both() {
+                //     if (this.remember && this.ssl == true) {
+                //         return false;
+                //     } else {
+                //         return true;
+                //     }
+
+                // }
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

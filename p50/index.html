@@ -1,0 +1,71 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-16 17:08:06
+ * @LastEditTime: 2019-09-16 17:28:59
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>V-model修饰符</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="app">
+
+        <p>修饰符.lazy</p>
+
+        <span> 修饰符 {{lazy}}</span>
+        <input type="text" name="lazy" id="lazy" v-model.lazy="lazy">
+        <p>输入完之后按ENTER才会显示内容</p>
+
+
+
+        <p>修饰符.trim</p>
+
+        <span> 修饰符 {{trim}}</span>
+        <input type="text" name="trim" id="trim" v-model.trim="trim">
+        <p>会删除用户输入内容前后的空格</p>
+
+
+
+        <p>修饰符.number</p>
+
+        <span> 修饰符 {{typeof number}}</span>
+        <input type="text" name="number" id="number" v-model.number="number">
+        <p>会将用户输入的数字从string转换成number类型。</p>
+
+
+
+
+
+
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {
+                lazy: '',
+                trim: '',
+                number: ''
+
+            },
+            computed: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
