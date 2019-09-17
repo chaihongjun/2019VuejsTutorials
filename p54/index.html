@@ -1,0 +1,108 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-17 13:58:25
+ * @LastEditTime: 2019-09-17 15:11:47
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>父子组件</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">父子组件</h1>
+                    <p>总结</p>
+                    <p>由于父组件的模板会调用子组件，所以，子组件的构造应当尽量提前</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <one-component></one-component>
+                    <two-component>
+                    </two-component>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        //构造第一个组件
+        const oneComponent = Vue.extend({
+            template: `<div class="card one">
+                        <div class="card-body">
+                            <h4 class="card-title">组件一</h4>
+                            <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                        </div>
+                    </div>`
+        });
+
+
+        //构造第四个组件 组件三要调用
+        const fourComponent = Vue.extend({
+            template: `<div class="card four">
+                        <div class="card-body">
+                            <h4 class="card-title">组件四</h4>
+                            <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                        </div>
+                    </div>`
+        });
+
+
+
+        //   由于 组件二要调用组件三，所以，需要先构造组件三
+        //构造第三个组件
+        const threeComponent = Vue.extend({
+            template: `<div class="card three">
+                        <div class="card-body">
+                            <h4 class="card-title">组件三</h4>
+                            <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                              <four-component></four-component>
+                        </div>
+                    </div>`,
+            components: {
+                "four-component": fourComponent
+            }
+        });
+
+        //构造第二个组件
+        const twoComponent = Vue.extend({
+            //  在组件二内调用组件三
+            template: `<div class="card two">
+            <div class="card-body">
+                <h4 class="card-title">组件二</h4>
+                <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                  <three-component></three-component>
+            </div>
+        </div>`,
+            // 第二个组件内再注册一个小组件
+            components: {
+                // 组件三项对于组件二是子组件，组件二是父组件
+                "three-component": threeComponent
+            }
+        });
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            components: {
+                // 注册组件
+                // 组件一和组件二相对Vue实例来说是子组件，Vue实例是父组件
+                "one-component": oneComponent,
+                "two-component": twoComponent
+            }
+        });
+    </script>
+</body>
+
+</html>
