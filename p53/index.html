@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-09-17 10:21:28
- * @LastEditTime: 2019-09-17 11:28:36
+ * @LastEditTime: 2019-09-17 13:50:34
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -53,6 +53,8 @@
     <!--  引入Vue   -->
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
     <script>
+        // 步骤一：构建组件构造器(对象)
+        // Vue.extend({ Options,构造组件的各种选项 })
         const componentConstructor = Vue.extend({
             template: `<div class="card">
                         <div class="card-body">
@@ -61,17 +63,20 @@
                         </div>
                     </div>`
         });
+        //  步骤二：注册组件（全局）
+        // Vue.component( id, [definition] )
+        // 使用ID给组件命名类似HTML元素名称
+        //  [definition] 是组件构造器对象
 
         //全局组件
         //全局注册的组件，可以在Vue实例内任意使用 
         Vue.component("zujian", componentConstructor);
         //Vue实例化必须在组件构造注册之后
         const app = new Vue({
-            el: "#app ",
-            /
+            el: "#app ", //挂载Vue管理DOM节点
         });
         const anotherApp = new Vue({
-            el: "#anotherApp ",
+            el: "#anotherApp ", //挂载Vue管理DOM节点
 
 
             /*   注册局部组件  
