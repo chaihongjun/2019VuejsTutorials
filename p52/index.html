@@ -1,0 +1,106 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-16 17:39:15
+ * @LastEditTime: 2019-09-17 10:20:01
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件化基本使用过程</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">jumbotron</h1>
+                    <p class="lead">注册使用一个组件的基本步骤:</p>
+                    <p>1. 调用extend()方法创建组件构造器</p>
+                    <p>2. 使用component()方法注册组件</p>
+                    <p>3. 在Vue实例范围内使用组件</p>
+                    <p>需要注意的是，组件的构造和注册必须在Vue实例声明之前</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <!-- 这其实是一个组件 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">标题</h4>
+                            <p class="card-text">
+                                克边洛热利言新教百言江？术警亡鲁录寻欢？
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">标题</h4>
+                            <p class="card-text">
+                                倒梦转展本想请房正算了接研委。从油特医？
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">标题</h4>
+                            <p class="card-text">
+                                刻突形松琴王好六角！请远菜名困提续质？。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">标题</h4>
+                            <p class="card-text">
+                                义罪上结依究套知怀藏床语？压次什迹深珍！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <!-- 步骤三，在Vue实例范围内调用 -->
+                    <zujian></zujian>
+                    <zujian></zujian>
+                    <zujian></zujian>
+                    <zujian></zujian>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        // 步骤一：构建组件构造器(对象)
+        // Vue.extend({ Options,构造组件的各种选项 })
+        const componentConstructor = Vue.extend({
+            template: `<div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">组件标题</h4>
+                            <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                        </div>
+                    </div>`
+        });
+        //  步骤二：注册组件
+        // Vue.component( id, [definition] )
+        // 使用ID给组件命名类似HTML元素名称
+        //  [definition] 是组件构造器对象
+        Vue.component("zujian", componentConstructor);
+        //Vue实例化必须在组件构造注册之后
+        const app = new Vue({
+            el: "#app ", //挂载Vue管理DOM节点
+            data: {},
+            computed: {},
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
