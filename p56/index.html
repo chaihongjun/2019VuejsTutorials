@@ -1,0 +1,120 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-17 16:19:27
+ * @LastEditTime: 2019-09-17 17:31:38
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组件模板抽离写法</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">组件模板抽离方法</h1>
+                    <p>方法一，使用 script标签</p>
+
+                    <p>方法二，使用template标签</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <full-component></full-component>
+                    <one-component></one-component>
+                    <two-component></two-component>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+
+    <!-- 方法一 抽取模板 -->
+    <script type="text/x-template" id="full-component">
+        <!-- 全局组件模板 -->
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">全局组件</h4>
+                <p class="card-text">模板抽离主要用script和template方法</p>
+            </div>
+        </div>
+    </script>
+
+    <!-- 组件一模板 -->
+    <script type="text/x-template" id="one-component">
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">组件一</h4>
+                <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+            </div>
+        </div>
+    </script>
+
+    <!-- 方法二 抽取模板 -->
+    <!-- 组件二 模板 -->
+    <template id="two-component">
+      <div class="card two">
+        <div class="card-body">
+          <h4 class="card-title">组件二</h4>
+          <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+          <!-- 调用 组件三 -->
+          <three-component></three-component>
+        </div>
+      </div>
+    </template>
+
+    <!-- 组件三 模板 -->
+    <template id="three-component">
+            <div class="card three">
+              <div class="card-body">
+                <h4 class="card-title">组件三</h4>
+                <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+              </div>
+            </div>
+          </template>
+
+    <script>
+        /* 全局组件注册的语法糖  */
+        // 模板抽离  方法一
+        Vue.component("full-component", {
+            template: "#full-component"
+        });
+
+
+
+        const app = new Vue({
+            el: "#app ",
+            components: {
+                // 子组件注册
+                "one-component": {
+                    //模板抽离 方法一
+                    template: "#one-component"
+                },
+
+                "two-component": {
+                    //模板抽离 方法二
+                    template: "#two-component",
+                    // 子组件注册
+                    components: {
+                        // 模板抽离 方法二
+                        "three-component": {
+                            template: '#three-component'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
