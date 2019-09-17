@@ -1,0 +1,90 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-17 10:21:28
+ * @LastEditTime: 2019-09-17 11:28:36
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>全局组件和局部组件</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">jumbotron</h1>
+                    <p class="lead">Vue.extend()创建的是一个构造器对象</p>
+                    <p>参数template代表自定义的组件模板，用来显示我们需要的HTML代码</p>
+                    <p>通过Vue.component()方式注册的组件属于全局组件，可以在Vue实例范围内任意使用</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <!-- 全局组件渲染成功 -->
+                    <zujian></zujian>
+                    <!-- 报错 局部组件渲染失败  这个组件属于 anotherApp -->
+                    <jubu></jubu>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="anotherApp">
+        <div class="container">
+            <div class="row">
+                <div class="card-group">
+                    <!-- 全局组件渲染成功 -->
+                    <zujian></zujian>
+
+                    <!-- 局部组件渲染成功 -->
+                    <jubu></jubu>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+        const componentConstructor = Vue.extend({
+            template: `<div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">组件标题</h4>
+                            <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                        </div>
+                    </div>`
+        });
+
+        //全局组件
+        //全局注册的组件，可以在Vue实例内任意使用 
+        Vue.component("zujian", componentConstructor);
+        //Vue实例化必须在组件构造注册之后
+        const app = new Vue({
+            el: "#app ",
+            /
+        });
+        const anotherApp = new Vue({
+            el: "#anotherApp ",
+
+
+            /*   注册局部组件  
+            在Vue实例内通过选项 components 注册局部组件 */
+            components: {
+
+                //  "jubu" 是使用组件时的标签名
+                //  componentConstructor 是组件构造器对象
+
+                "jubu": componentConstructor
+            }
+        });
+    </script>
+</body>
+
+</html>
