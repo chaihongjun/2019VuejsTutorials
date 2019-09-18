@@ -1,0 +1,132 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-17 17:37:30
+ * @LastEditTime: 2019-09-17 18:02:03
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>为什么组件里的data必须是函数</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">为什么组件里的data必须是函数</h1>
+                    <p class="lead" v-cloak>{{ instance }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <full-component></full-component>
+                    <one-component></one-component>
+                    <two-component></two-component>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <!-- 方法一 抽取模板 -->
+    <script type="text/x-template" id="full-component">
+        <!-- 全局组件模板 -->
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">全局组件</h4>
+                <p class="card-text">模板抽离主要用script和template方法</p>
+                <!-- 报错，Vue实例数据无法在组件内直接使用 -->
+                <!-- <p class="card-text">从Vue实例调用数据{{instance}}</p> -->
+            </div>
+        </div>
+    </script>
+    <!-- 组件一模板 -->
+    <script type="text/x-template" id="one-component">
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">组件一</h4>
+                <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+
+                <p class="card-text">组件一数据：{{oneComponent}}</p>
+            </div>
+        </div>
+    </script>
+    <!-- 方法二 抽取模板 -->
+    <!-- 组件二 模板 -->
+    <template id="two-component">
+      <div class="card two">
+        <div class="card-body">
+          <h4 class="card-title">组件二</h4>
+          <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+          <!-- 调用 组件三 -->
+          <three-component></three-component>
+        </div>
+      </div>
+    </template>
+    <!-- 组件三 模板 -->
+    <template id="three-component">
+      <div class="card three">
+        <div class="card-body">
+          <h4 class="card-title">组件三</h4>
+          <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+        </div>
+      </div>
+    </template>
+    <script>
+        /* 全局组件注册的语法糖  */
+        // 模板抽离  方法一
+        Vue.component("full-component", {
+            template: "#full-component"
+        });
+        const app = new Vue({
+            el: "#app ",
+            data: {
+                instance: "我是Vue实例数据"
+            },
+            components: {
+                // 子组件注册
+                "one-component": {
+                    //模板抽离 方法一
+                    template: "#one-component",
+                    // 组件data选项必须是函数,而且返回值是对象
+                    // data: {
+                    //     oneComponent: "我是组件一"
+                    // }
+                    data() {
+                        return {
+                            oneComponent: "我是组件一"
+                        }
+                    }
+                },
+                "two-component": {
+                    //模板抽离 方法二
+                    template: "#two-component",
+                    // 子组件注册
+                    components: {
+                        // 模板抽离 方法二
+                        "three-component": {
+                            template: "#three-component"
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
