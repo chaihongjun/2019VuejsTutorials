@@ -1,0 +1,181 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-18 09:26:36
+ * @LastEditTime: 2019-09-18 16:21:25
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>父子组件通信 父传子props</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron ">
+                <div class="container">
+                    <h1 class="display-4">父子组件通信 父传子props</h1>
+                    <p>任务一：Vue实例传数据给全局组件</p>
+                    <p>任务二：组件二 传值 给组件三</p>
+                    <p>任务三： Vue实例传值给组件一，并做验证</p>
+                    <p>任务四： Vue实例传值给组件二，组件二再传给组件三</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-group">
+                    <!-- :message  前面的message为子组件full-component的属性
+                       message  后面的message为Vue实例的数据
+                       这里通过v-bind将Vue实例（父组件）的数据传给子组件 -->
+                    <full-component :fromvueinstance="vueinstance"></full-component>
+                    <one-component :movie="movies"></one-component>
+                    <two-component :fromroot="grandpatograndson">
+                    </two-component>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <!-- 方法一 抽取模板 -->
+    <script type="text/x-template" id="full-component">
+        <!-- 全局组件模板 -->
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">全局组件</h4>
+                <p class="card-text">模板抽离主要用script和template方法</p>
+                <p class="badge badge-success">{{fromvueinstance}}</p>
+            </div>
+        </div>
+    </script>
+    <!-- 组件一模板 -->
+    <script type="text/x-template" id="one-component">
+        <div class="card one">
+            <div class="card-body">
+                <h4 class="card-title">组件一</h4>
+                <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+                <ul class="list-group">
+                    <li v-for="item in movie" class="list-group-item list-group-item-action">
+                        片名：{{item.name}}
+                        <br> 类型：{{item.genre}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </script>
+    <!-- 组件二 模板 -->
+    <template id="two-component">
+      <div class="card two">
+        <div class="card-body">
+          <h4 class="card-title">组件二</h4>
+          <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+
+            <p class="badge badge-info">来自Vue实例:{{fromroot}}</p>
+
+          <!-- 调用 组件三 -->
+          <three-component :fromcomponenttwo="componenttwodata"  :receivefromtwo="receivefromvue"></three-component>
+        </div>
+      </div>
+    </template>
+    <!-- 组件三 模板 -->
+    <template id="three-component">
+      <div class="card three">
+        <div class="card-body">
+          <h4 class="card-title">组件三</h4>
+          <p class="card-text">克边洛热利言新教百言江？术警亡鲁录寻欢？</p>
+              <p class="badge badge-success">{{fromcomponenttwo}}</p>
+
+              <p class="badge badge-info">{{receivefromtwo}}</p>
+        </div>
+      </div>
+    </template>
+    <script>
+        /* 全局组件注册的语法糖  */
+        // 模板抽离  方法一
+        Vue.component("full-component", {
+            template: "#full-component",
+            // 声明子组件属性，用来接收父组件传值
+            props: ["fromvueinstance"],
+            data() {
+                return {
+                    receiver: ''
+                }
+            }
+        });
+        const app = new Vue({
+            el: "#app ",
+            data: {
+                vueinstance: "我是Vue实例数据",
+                movies: [{
+                    name: '《攀登者》',
+                    genre: '冒险'
+                }, {
+                    name: '《中国机长》',
+                    genre: '传记'
+                }, {
+                    name: '《我和我的祖国》',
+                    genre: '剧情'
+                }],
+
+                grandpatograndson: '从爷爷Vue传递给孙子组件三',
+
+            },
+            components: {
+                // 子组件注册
+                "one-component": {
+                    //模板抽离 方法一
+                    template: "#one-component",
+                    props: {
+                        // props 也可接收对象
+                        movie: {
+                            //类型限制
+                            type: Array,
+                            required: true
+                        }
+                    }
+                },
+                "two-component": {
+
+                    props: ['fromroot'],
+                    data() {
+                        return {
+                            componenttwodata: '组件二的数据',
+                            //将接收到的props 变成自己的 data
+
+                            /* this指向当前的组件对象
+                            
+                            祖父组件传来的数据，接收到本组件，
+                            本组件转换成本地data，准备再传给子组件
+                             */
+                            receivefromvue: this.fromroot
+                        };
+                    },
+                    //接收来自父组件Vue实例数据
+                    //模板抽离 方法二
+                    template: "#two-component",
+                    // 子组件注册
+                    components: {
+                        // 模板抽离 方法二
+                        "three-component": {
+                            template: "#three-component",
+                            //接收来自父组件 组件二的数据
+                            props: ['fromcomponenttwo', 'receivefromtwo']
+                        }
+                    },
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
