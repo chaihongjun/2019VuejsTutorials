@@ -1,0 +1,106 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-24 13:58:50
+ * @LastEditTime: 2019-09-24 15:44:15
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>父子组件双向绑定案例(watch)</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">父子组件双向绑定步骤思路</h1>
+          <p class="lead">双向绑定的数据走向:</p>
+          <p>0.父组件data => 1.子组件prop => 2.子组件data</p>
+          <p>3.子组件input通过v-model绑定子组件data</p>
+          <p>
+            4.watch监控子组件data,当子组件data变化的时候，使用子组件自定义事件通知父组件并传值给父组件
+          </p>
+          <p>
+            5.父组件通过监听子组件自定义事件，接收来自子组件data的新数据
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="app">
+      <!-- 1.子组件prop通过 ":prop=父组件data" 形式接收父附件data -->
+      <!--  5.父组件通过监听子组件自定义事件，接收来自子组件data的新数据 -->
+      <cpn
+        :number1="num1"
+        :number2="num2"
+        @num-one-change="changeOneProp"
+        @num-two-change="changeTwoProp"
+      >
+      </cpn>
+    </div>
+    <template id="cpn">
+      <div>
+        <h2>props：{{ number1 }}</h2>
+        <h2>子组件data:{{ cpnNumberOne }}</h2>
+        绑定了data
+        <!-- 3.子组件input通过v-model绑定子组件data -->
+        <input type="text" v-model="cpnNumberOne" />
+        <h2>props：{{ number2 }}</h2>
+        <h2>子组件data:{{ cpnNumberTwo }}</h2>
+        绑定了data
+        <input type="text" v-model="cpnNumberTwo" />
+      </div>
+    </template>
+    <!--  引入Vue   -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          num1: 1,
+          num2: 0
+        },
+        methods: {
+          // 6. 父组件接收来自子组件data的新数据
+          changeOneProp(val) {
+            this.num1 = parseInt(val);
+          },
+          changeTwoProp(val) {
+            this.num2 = parseInt(val);
+          }
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            props: {
+              number1: Number,
+              number2: Number
+            },
+            data() {
+              // 2. 创建子组件data 接收prop
+              return {
+                cpnNumberOne: this.number1,
+                cpnNumberTwo: this.number2
+              };
+            },
+            watch: {
+              //  4.watch监控子组件data,当子组件data变化的时候，
+              //    使用子组件自定义事件通知父组件并传值给父组件
+              cpnNumberOne(newValue) {
+                this.$emit("num-one-change", newValue);
+              },
+              cpnNumberTwo(newValue) {
+                this.$emit("num-two-change", newValue);
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
