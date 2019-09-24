@@ -1,0 +1,112 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-24 15:51:09
+ * @LastEditTime: 2019-09-24 17:03:53
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>父组件访问子组件$children $refs</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      #app,
+      .one,
+      .two {
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">$children取得的是子组件对象组成的数组</h1>
+          <p class="lead">因为受子组件顺序影响，一般不使用$children。</p>
+          <h1 class="display-6">一般使用$refs(子组件对象的引用)</h1>
+          <p>
+            默认情况下$refs是空对象，如果要使用，需要对子组件标识ref属性refname
+          </p>
+          <p>指定访问方式：$refs.refname</p>
+        </div>
+      </div>
+
+      <div id="app">
+        <button type="button" @click="btnClick">ROOT按钮</button>
+        <cpn-one ref="one"></cpn-one>
+      </div>
+    </div>
+    <template id="one">
+      <div class="one">
+        <p>我是子组件 one</p>
+        <button type="button" @click="btnClick">cpn one 按钮</button>
+        <cpn-two ref="two"></cpn-two>
+      </div>
+    </template>
+
+    <template id="two">
+      <div class="two">
+        <p>我是子组件 two</p>
+        <button type="button" @click="btnClick">cpn two 按钮</button>
+      </div>
+    </template>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          btnClick() {
+            console.log("this.$children是数组么:");
+            console.log(this.$children instanceof Array); //说明 $children 是一个数组
+            console.log(this.$children);
+            console.log("this.$children[0]：");
+            console.log(this.$children[0]);
+            console.log(this.$children[0].showMsg());
+            console.log("this.$children[0].$children[0]：");
+            console.log(this.$children[0].$children[0]);
+            console.log(this.$children[0].$children[0].showMsg());
+            console.log("-----------------------");
+            console.log(this.$refs);
+          }
+        },
+        components: {
+          cpnOne: {
+            template: "#one",
+            methods: {
+              btnClick() {
+                console.log(this.$refs);
+              },
+              showMsg() {
+                console.log("我是cpn one");
+              }
+            },
+            components: {
+              cpnTwo: {
+                template: "#two",
+                methods: {
+                  btnClick() {
+                    console.log(this.$refs.two);
+                  },
+                  showMsg() {
+                    console.log("我是cpn two");
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
