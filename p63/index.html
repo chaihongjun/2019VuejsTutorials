@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-09-23 10:01:25
- * @LastEditTime: 2019-09-23 18:11:14
+ * @LastEditTime: 2019-09-24 15:29:45
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -15,10 +15,26 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">父子组件双向绑定步骤思路</h1>
+          <p class="lead">双向绑定的数据走向:</p>
+          <p>0.父组件data => 1.子组件prop => 2.子组件data</p>
+          <p>3.子组件data绑定input的value,并监听input事件</p>
+          <p>4.子组件监听input值的变化：input变化的value赋值给子组件data</p>
+          <p>5.同时子组件通知父组件input有变化，并携带这个新值给父组件</p>
+          <p>
+            6.父组件通过监听子组件自定义事件，接收来自子组件data的新数据
+          </p>
+        </div>
+      </div>
+    </div>
     <div id="app">
       <!-- 父组件监听子组件的自定义事件  并将子组件的数据传递给父组件-->
+      <!-- 1.子组件prop通过 ":prop=父组件data" 形式接收父附件data -->
+      <!-- 6.父组件通过监听子组件自定义事件，接收来自子组件data的新数据 -->
       <cpn
         :number1="num1"
         :number2="num2"
@@ -44,7 +60,7 @@
         <h2>props：{{ number1 }}</h2>
         <h2>子组件data:{{ cpnNumberOne }}</h2>
         绑定了data
-
+        <!-- 3.子组件data绑定input的value,并监听input事件 -->
         <input type="text" :value="cpnNumberOne" @input="changeOne" />
         <h2>props：{{ number2 }}</h2>
         <h2>子组件data:{{ cpnNumberTwo }}</h2>
@@ -62,7 +78,7 @@
           num2: 0
         },
         methods: {
-          // 事件处理函数 接收子组件数据 传递给父组件
+          // 6. 父组件接收来自子组件data的新数据
           changeOneProp(val) {
             this.num1 = parseInt(val);
           },
@@ -78,22 +94,20 @@
               number2: Number
             },
             data() {
-              // 1.弄一个prop的副本用于子组件修改
+              // 2. 创建子组件data 接收prop
               return {
                 cpnNumberOne: this.number1,
                 cpnNumberTwo: this.number2
               };
             },
             methods: {
-              //2.当改变input的value值时，同步修改绑定的data
+              //4.监听input事件，input的值传递给子组件data
               changeOne(event) {
-                //console.log(event.target)
                 this.cpnNumberOne = event.target.value;
-                //3. 同时又通知父组件，子组件的data变化了
+                // 5.同时子组件通知父组件input有变化，并携带这个新值给父组件
                 this.$emit("num-one-change", this.cpnNumberOne);
               },
               changeTwo(event) {
-                // console.log(event.target)
                 this.cpnNumberTwo = event.target.value;
                 this.$emit("num-two-change", this.cpnNumberTwo);
               }
