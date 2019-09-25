@@ -1,0 +1,54 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-25 14:35:19
+ * @LastEditTime: 2019-09-25 15:28:11
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>编译作用域概念</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>模板里面的变量只在它当前的模板内有效</p>
+
+      <cpn v-show="isShow"></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h2>我是子组件</h2>
+        <p>可以正常显示，说明代码里使用的是父组件的isShow</p>
+        <!-- 按钮不能显示，因为子组件的isShow是false -->
+        <button v-show="isShow">按钮</button>
+      </div>
+    </template>
+
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          name: "我是ROOT组件",
+          isShow: true //生效
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            data() {
+              return {
+                isShow: false //不使用
+              };
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
