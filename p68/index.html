@@ -1,0 +1,94 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-25 10:40:59
+ * @LastEditTime: 2019-09-25 11:47:45
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>slot插槽的基本使用</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .border {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">
+            组件的插槽让组件更加具有扩展性,插槽主要是扩展组件内容
+          </h1>
+          <p class="lead">让组件使用者决定组件内容，而不是预先设定死</p>
+          <p>组件封装的原则是：抽取共性，而将不同的暴露为插槽</p>
+          <p>
+            插槽的基本使用方法：1.在组件模板内使用插槽slot标签，若有默认值也写在slot标签内
+          </p>
+          <p>
+            2.在组件调用标签处，将要赋给插槽的内容写在组件标签内（组件标签包裹在最外面）
+          </p>
+        </div>
+      </div>
+      <div id="app">
+        <p>通过插槽，扩展组件内容</p>
+
+        原始组件版本：
+        <cpn></cpn>
+        添加按钮版本：
+        <cpn>
+          <!-- 在调用的组件内  添加内容  以替代插槽-->
+          <button type="button">按钮</button>
+        </cpn>
+
+        输入表单版本：
+        <cpn>
+          <!-- 在调用的组件内  添加内容  以替代插槽-->
+          <input type="text" />
+        </cpn>
+      </div>
+    </div>
+    <template id="cpn">
+      <div class="border">
+        <h2>
+          我是组件cpn
+        </h2>
+        <!-- 预留插槽 以便扩展 -->
+        <!-- 在调用的组件内  添加内容  以替代插槽-->
+        <slot
+          ><p>
+            带默认内容，当使用组件时，没提供插槽对应的内容，则会显示这段文件
+          </p></slot
+        >
+      </div>
+    </template>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          name: "我是ROOT组件"
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            data() {
+              return {};
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
