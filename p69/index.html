@@ -1,0 +1,91 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-25 13:46:08
+ * @LastEditTime: 2019-09-25 14:30:26
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>slot具名插槽的使用</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .border {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+      }
+      .input {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">
+            组件的插槽让组件更加具有扩展性,插槽主要是扩展组件内容
+          </h1>
+          <p class="lead">让组件使用者决定组件内容，而不是预先设定死</p>
+          <p>组件封装的原则是：抽取共性，而将不同的暴露为插槽</p>
+          <p>
+            插槽的基本使用方法：1.在组件模板内使用插槽slot标签(设定插槽位置)，若有默认值也写在slot标签内
+          </p>
+          <p>
+            2.在组件调用标签处，将要赋给插槽的内容写在组件标签内（组件标签包裹在最外面）（设置插槽要显示的内容）
+          </p>
+        </div>
+      </div>
+      <div id="app">
+        <p>模仿京东移动端顶部模块</p>
+        <cpn>
+          <!-- 模仿京东移动端顶部模块 -->
+
+          <button type="button" class="btn btn-dark btn-sm" slot="back">
+            返回
+          </button>
+          <input type="text" class="input" slot="search" />
+          <button type="button" class="btn btn-dark btn-sm" slot="menu">
+            menu
+          </button>
+        </cpn>
+      </div>
+    </div>
+    <!-- 组件模板 -->
+    <template id="cpn">
+      <div>
+        <slot name="back">返回键</slot>
+        <!--  返回键 -->
+        <slot name="search">搜索框</slot>
+        <!--  搜索框 -->
+        <slot name="menu">菜单键</slot>
+        <!--  菜单 -->
+      </div>
+    </template>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          name: "我是ROOT组件"
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            data() {
+              return {};
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
