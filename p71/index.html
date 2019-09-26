@@ -1,0 +1,108 @@
+<!--
+ * @Author: ChaiHongJun
+ * @Date: 2019-09-25 15:30:32
+ * @LastEditTime: 2019-09-26 11:00:07
+ * @LastEditors: ChaiHongJun
+ * @Description: 头部文件注释
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>作用域插槽的使用</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron ">
+        <div class="container">
+          <h1 class="display-6">
+            作用域插槽的作用
+          </h1>
+          <p class="lead">
+            父组件替换插槽标签，子组件负责提供数据内容（将子组件数据传给父组件，父组件负责渲染）
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="app">
+      <p>
+        需求,通过不同的插槽以不同的方式(水平方式，列表，数组)显示数组内容，数组是子组件的数据
+      </p>
+      <!-- 列表显示数组 -->
+      <p>编程语言：</p>
+      <p>默认列表方式显示</p>
+      <cpn></cpn>
+      <p>水平方式显示(slot slot-scope)</p>
+      <!-- 作用域插槽使用方法：+
+           1.
+        在子组件模板内，使用slot,和slot自定义属性绑定子组件数据 2.
+        在父组件调用子组件的标签内，给模板赋予属性 slot-scope 
+          子组件模板：
+            <slot :任意属性名1="子组件数据"  name="slot名称"></slot>
+           父组件内的子组件调用：
+            <子组件标签> 
+              <template slot-scope="任意属性名2"  slot="slot名称">
+                <div>
+                        模板内的数据就是: 任意属性名2.任意属性名1
+                </div>
+              </template>
+            </子组件标签> 
+ -->
+      <cpn>
+        <template slot-scope="abc" slot="one">
+          <span v-for="language in abc.data">{{ language }}-</span>
+        </template>
+      </cpn>
+      <p>水平方式显示(v-slot)</p>
+      <cpn>
+        <!-- v-slot:one 这里的one是对应的name=one的slot,
+            vSlotData可任意命名
+            vSlotData.data 后面的data 是子组件的属性（绑定了子组件数据）
+            vSlotData.data 方式访问子组数据 -->
+        <template v-slot:one="vSlotData">
+          <span v-for="language in vSlotData.data">{{ language }}-</span>
+        </template>
+      </cpn>
+    </div>
+
+    <!-- 子组件模板  -->
+    <template id="cpn">
+      <div>
+        <!-- 子组件的数据传给父组件 -->
+        <!-- data是自定义的slot的属性，绑定了所在子组件的数据languages 
+                data属性值将传入子组件模板内
+            -->
+        <slot :data="languages" name="one">
+          <ul>
+            <li v-for="language in languages">{{ language }}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js "></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          name: "我是ROOT组件"
+        },
+        components: {
+          cpn: {
+            template: "#cpn",
+            data() {
+              return {
+                languages: ["JavaScript", "TypeScript", "Go", "PHP", "Java"]
+              };
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
