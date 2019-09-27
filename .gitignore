@@ -1,1 +1,7 @@
 HYMall/
+node_modules/
+p75/.yo-rc.json
+p75/package.json
+p75/package-lock.json
+p75/webpack.config.js
+p75/README.md
