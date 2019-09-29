@@ -7,39 +7,17 @@
  -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-      <ul>
-        <li v-for="(info,index) in infos">{{ index }}-{{ info }}</li>
-      </ul>
-      <!-- 引入子组件 -->
-      <msg></msg>
-    </div>
-    <template id="msg">
-      <div>
-        <h2>
-          webpack集成Vue的注意事项
-        </h2>
+</head>
 
-        <blockquote>指令 npm i vue</blockquote>
-        安装的只是runtime Only,无法渲染template，需要在
-        webpack.config.js里面添加代码:
-        <pre>
-                  resolve: {
-                    alias: {
-                      vue: "vue/dist/vue.js"
-                    }
-                  },
-                </pre
-        >
-        引入完整版本的内容
-      </div>
-    </template>
-  </body>
+<body>
+    <div id="app">
+    </div>
+</body>
+
 </html>
