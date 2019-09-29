@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-09-26 16:21:19
- * @LastEditTime: 2019-09-26 18:03:11
+ * @LastEditTime: 2019-09-27 13:37:37
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -18,9 +18,9 @@ let version = 4;
 
 //导出模块内容
 
-module.exports = {
-  add,
-  mul
-};
+// module.exports = {
+//   add,
+//   mul
+// };
 
 export { name, version };
