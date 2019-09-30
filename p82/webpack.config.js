@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-09-29 17:21:07
- * @LastEditTime: 2019-09-29 17:35:52
+ * @LastEditTime: 2019-09-30 08:40:49
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -44,7 +44,8 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
+      title: "webpack集成Vue以及注意事项"
     })
   ],
   resolve: {
