@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-10-04 08:50:22
- * @LastEditTime: 2019-10-04 09:27:38
+ * @LastEditTime: 2019-10-04 10:21:35
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -12,6 +12,9 @@ import Home from "./views/Home.vue";
 Vue.use(Router);
 
 export default new Router({
+  // linkActiveClass: "ac",
+  // linkExactActiveClass: "exact",
+  // mode: "history",   默认是hash模式，可以改成H5的 history模式
   routes: [
     {
       path: "/",
