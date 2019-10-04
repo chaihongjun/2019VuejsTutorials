@@ -12,8 +12,16 @@
     "vue-router": "^3.0.3"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
+    "bootstrap": "^4.3.1",
+    "mutationobserver-shim": "^0.3.3",
+    "node-sass": "^4.12.0",
+    "popper.js": "^1.15.0",
+    "portal-vue": "^2.1.4",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-bootstrap-vue": "^0.4.0",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {
