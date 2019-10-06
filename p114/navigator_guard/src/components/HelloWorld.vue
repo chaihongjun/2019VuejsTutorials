@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-10-05 23:02:47
- * @LastEditTime: 2019-10-06 00:05:22
+ * @LastEditTime: 2019-10-06 16:55:15
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -11,7 +11,24 @@
 
 <script>
 export default {
-  name: "HelloWorld"
+  name: "HelloWorld",
+  /* 组件内守卫 */
+  //进入组件前
+  beforeRouteEnter(to, from, next) {
+    console.log("进入组件Helloworld前");
+    next();
+  },
+
+  //进入后更新
+  beforeRouteUpdate(to, from, next) {
+    consolelog("进入Helloworld后更新");
+    next();
+  },
+  //离开组件前
+  beforeRouteLeave(to, from, next) {
+    console.log("离开组件Helloworld前");
+    next();
+  }
 };
 </script>
 
