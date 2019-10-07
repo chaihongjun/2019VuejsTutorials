@@ -1,0 +1,38 @@
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  position: relative;
+}
+
+.tabBar {
+  border: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: row;
+  /*主轴方向 */
+  justify-content: space-around;
+  /*  主轴上的对齐方式 */
+  align-items: center;
+  /* 交叉轴上的对齐方式 */
+  background-color: aliceblue;
+  height: 50px;
+  box-shadow: 0 -1px 1px rgb(100, 150, 250, .5)
+}
+
+.tabBarItem {
+  /* width: 100%; */
+  padding: 10px 10px;
+  flex: 1;
+}
+
+.tabBarItem p {
+  font-size: 16px;
+}
