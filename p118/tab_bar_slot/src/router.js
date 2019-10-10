@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-10-07 18:05:57
- * @LastEditTime: 2019-10-09 12:08:12
+ * @LastEditTime: 2019-10-10 17:52:06
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -10,6 +10,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 
 Vue.use(Router);
+// Vue.use(Router, axios);
 
 export default new Router({
   routes: [
