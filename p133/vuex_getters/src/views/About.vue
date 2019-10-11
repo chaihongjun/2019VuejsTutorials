@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
- * @Date: 2019-10-11 09:12:13
- * @LastEditTime: 2019-10-11 10:58:26
+ * @Date: 2019-10-11 16:39:30
+ * @LastEditTime: 2019-10-11 17:20:04
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -9,9 +9,8 @@
   <div class="about">
     <h1>This is an about page</h1>
 
-    <p>{{$store.state.info}}</p>
-
-    <p>共享数据{{$store.state.counter}}</p>
+    <p>counter的值是:{{$store.state.counter}}</p>
+    <p>自动计算counter的平方数(getters)：{{$store.getters.power}}</p>
 
     <button @click="add">+1</button>
     <button @click="sub">-1</button>
@@ -24,7 +23,7 @@ export default {
   name: "About",
   methods: {
     add() {
-      //提交一个mutatiions变动
+      //让store维护数据
       this.$store.commit("increment");
     },
     sub() {
