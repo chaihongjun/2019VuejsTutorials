@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-10-12 09:23:23
- * @LastEditTime: 2019-10-12 11:25:47
+ * @LastEditTime: 2019-10-12 14:23:12
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -26,6 +26,8 @@
 
     <button @click="addPlayerOne(player)">增加球员方式1</button>
     <button @click="addPlayerTwo(player)">增加球员方式2</button>
+
+    <button @click="subage">球员减年龄1岁</button>
 
     <ul v-show="show">
       <li v-for="(player,index) in $store.state.players" :key="index">{{player}}</li>
@@ -66,6 +68,9 @@ export default {
       //4. this.$store.commit({事件类型，数据对象});
       // payload == { type: "addPlayerTwo", player }
       this.$store.commit({ type: "addPlayerTwo", player });
+    },
+    subage() {
+      this.$store.commit({ type: "subAge" });
     }
   }
 };

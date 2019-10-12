@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-10-12 09:23:23
- * @LastEditTime: 2019-10-12 11:25:06
+ * @LastEditTime: 2019-10-12 14:21:57
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -41,6 +41,11 @@ export default new Vuex.Store({
     // payload == { type: "addPlayerTwo", player }
     addPlayerTwo(state, payload) {
       state.players.push(payload.player);
+    },
+    subAge(state) {
+      state.players.forEach(player => {
+        player.age -= 1;
+      });
     }
   },
   actions: {}
