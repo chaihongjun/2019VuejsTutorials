@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-10-11 16:39:30
- * @LastEditTime: 2019-10-11 17:52:53
+ * @LastEditTime: 2019-10-12 08:54:01
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -15,6 +15,12 @@
     <p>获取年龄小于20岁的学生信息：</p>
     <p>{{getLessThan20}}</p>
 
+    <div class="infos">
+      <p>store共享 state里面的数据给全部组件,组件模板内的访问方式是插值访问$store.state.变量名</p>
+
+      <p>而在任意一个组件内改变state内数据变化的方法是 this.$store.commit(mutations里面的一个事件名称)</p>
+      <p>在mutation里面则是通过 state.变量名 的方式访问</p>
+    </div>
     <router-view />
   </div>
 </template>
@@ -54,5 +60,10 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.infos {
+  border: 1px solid #cccccc;
+  text-align: left;
 }
 </style>

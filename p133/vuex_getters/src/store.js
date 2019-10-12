@@ -1,7 +1,7 @@
 /*
  * @Author: ChaiHongJun
  * @Date: 2019-10-11 16:39:30
- * @LastEditTime: 2019-10-11 17:32:55
+ * @LastEditTime: 2019-10-12 08:49:35
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  */
@@ -20,6 +20,7 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    //参数自动带state
     increment(state) {
       state.counter++;
     },
@@ -29,6 +30,7 @@ export default new Vuex.Store({
   },
   actions: {},
   getters: {
+    //参数自动带state
     power(state) {
       return state.counter * state.counter;
     }
