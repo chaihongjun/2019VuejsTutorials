@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-10-14 08:58:11
- * @LastEditTime: 2019-10-14 10:57:49
+ * @LastEditTime: 2019-10-14 11:03:15
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -42,8 +42,9 @@ export default {
   methods: {
     showData() {
       axios({
-        baseURL: "http://192.168.0.222:7300",
-        url: "/mock/5d98362bb601f70efc7c1d7b/example/mock",
+        baseURL:
+          "http://192.168.0.222:7300/mock/5d98362bb601f70efc7c1d7b/example",
+        url: "/mock",
         method: "get"
       })
         .then(res => {
