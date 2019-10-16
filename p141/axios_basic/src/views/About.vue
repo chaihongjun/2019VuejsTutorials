@@ -1,7 +1,7 @@
 <!--
  * @Author: ChaiHongJun
  * @Date: 2019-10-14 08:58:11
- * @LastEditTime: 2019-10-14 11:03:15
+ * @LastEditTime: 2019-10-16 14:41:06
  * @LastEditors: ChaiHongJun
  * @Description: 头部文件注释
  -->
@@ -51,10 +51,16 @@ export default {
           // console.log(res.data.data.projects);
           // 传递数据给组件data
           this.tableData = res.data.data.projects;
-          //console.log(this.tableData);
+
+          console.log(res);
+          console.log("res.status:" + res.status);
+          console.log("res.statusText:" + res.statusText);
         })
         .catch(err => {
           console.log(err);
+        })
+        .finally(() => {
+          console.log("无论如何都会执行finally");
         });
     }
   }
